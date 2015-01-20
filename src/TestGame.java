@@ -13,7 +13,7 @@ public class TestGame {
 				System.out.println("Enter first player move coordinates");
 				int a=Integer.parseInt(br.readLine());
 				int b=Integer.parseInt(br.readLine());
-				Surround.oneMove(a, b);
+				boolean moveCheck=Surround.oneMove(a, b);
 				Surround.displayMatrix();
 				boolean cont;
 				do{
@@ -27,14 +27,14 @@ public class TestGame {
 				else if(res==2){
 					System.out.println("Player 2 has won");System.exit(0);
 				}
-				moveFlag++;
+				if(moveCheck)moveFlag++;
 			}
 			else{
 				//Second player
 				System.out.println("Enter second player move coordinates");
 				int a=Integer.parseInt(br.readLine());
 				int b=Integer.parseInt(br.readLine());
-				Surround.twoMove(a, b);
+				boolean moveCheck=Surround.twoMove(a, b);
 				Surround.displayMatrix();
 				boolean cont;
 				do{
@@ -48,7 +48,7 @@ public class TestGame {
 				else if(res==2){
 					System.out.println("Player 2 has won");System.exit(0);
 				}
-				moveFlag++;
+				if(moveCheck)moveFlag++;
 			}
 		}
 		System.out.println("Match drawn");

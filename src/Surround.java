@@ -47,23 +47,29 @@ public class Surround {
 	}
 
 	// Move for first player
-	static void oneMove(int x, int y) {
+	static boolean oneMove(int x, int y) {
 		if (grid[x - 1][y - 1] == 0) {
 			grid[x - 1][y - 1] = 1;
 			if (!oneHasStarted)
 				oneHasStarted = true;
-		} else
+			return true;
+		} else{
 			System.out.println("Already filled");
+			return false;
+		}
 	}
 
 	// Move for second player
-	static void twoMove(int x, int y) {
+	static boolean twoMove(int x, int y) {
 		if (grid[x - 1][y - 1] == 0) {
 			grid[x - 1][y - 1] = 2;
 			if (!twoHasStarted)
 				twoHasStarted = true;
-		} else
+			return true;
+		} else{
 			System.out.println("Already filled");
+			return false;
+		}
 	}
 
 	// Check matrix for implicit changes
