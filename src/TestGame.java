@@ -7,7 +7,7 @@ public class TestGame {
 		Surround.initialize(gs);
 		Surround.displayMatrix();
 		int moveFlag=2;
-		while(true){
+		while(!Surround.isFull()){
 			if(moveFlag%2==0){
 				//First player
 				System.out.println("Enter first player move coordinates");
@@ -51,5 +51,6 @@ public class TestGame {
 				moveFlag++;
 			}
 		}
+		System.out.println("Match drawn");
 	}
 }

@@ -17,6 +17,16 @@ public class Surround {
 		System.out.println(oneHasStarted);
 		System.out.println(twoHasStarted);
 	}
+	
+	// To check if matrix is full
+	static boolean isFull(){
+		int sum=0;
+		for(int i=0;i<size;i++)
+			for(int j=0;j<size;j++)
+				if(grid[i][j]==0)sum++;
+		if(sum==0)return true;
+		else return false;
+	}
 
 	// Initialize a null matrix
 	private static void createMatrix() {
