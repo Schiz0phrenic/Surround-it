@@ -17,15 +17,18 @@ public class Surround {
 		System.out.println(oneHasStarted);
 		System.out.println(twoHasStarted);
 	}
-	
+
 	// To check if matrix is full
-	static boolean isFull(){
-		int sum=0;
-		for(int i=0;i<size;i++)
-			for(int j=0;j<size;j++)
-				if(grid[i][j]==0)sum++;
-		if(sum==0)return true;
-		else return false;
+	static boolean isFull() {
+		int sum = 0;
+		for (int i = 0; i < size; i++)
+			for (int j = 0; j < size; j++)
+				if (grid[i][j] == 0)
+					sum++;
+		if (sum == 0)
+			return true;
+		else
+			return false;
 	}
 
 	// Initialize a null matrix
@@ -53,7 +56,7 @@ public class Surround {
 			if (!oneHasStarted)
 				oneHasStarted = true;
 			return true;
-		} else{
+		} else {
 			System.out.println("Already filled");
 			return false;
 		}
@@ -66,104 +69,144 @@ public class Surround {
 			if (!twoHasStarted)
 				twoHasStarted = true;
 			return true;
-		} else{
+		} else {
 			System.out.println("Already filled");
 			return false;
 		}
 	}
 
 	// Check matrix for implicit changes
-	static boolean checkMatrix() {
-		int e,sOne,sTwo,count;
-		boolean hasChanged=false;
-		for(int i=0;i<size;i++){
-			for(int j=0;j<size;j++){
-				e=grid[i][j];
-				sOne=0;sTwo=0;count=0;
-				if(e!=0){
+	static boolean checkMatrix(int x) {
+		int e, sOne, sTwo, count;
+		boolean hasChanged = false;
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				e = grid[i][j];
+				sOne = 0;
+				sTwo = 0;
+				count = 0;
+				if (e == x) {
 					// Check the 8 adjacent cells
-					//1 (top left)
-					if(i>0&&j>0){
-						if(grid[i-1][j-1]==1)sOne++;
-						else if(grid[i-1][j-1]==2)sTwo++;
+					// 1 (top left)
+					if (i > 0 && j > 0) {
+						if (grid[i - 1][j - 1] == 1)
+							sOne++;
+						else if (grid[i - 1][j - 1] == 2)
+							sTwo++;
 						count++;
 					}
-					//2 (top)
-					if(i>0){
-						if(grid[i-1][j]==1)sOne++;
-						else if(grid[i-1][j]==2)sTwo++;
+					// 2 (top)
+					if (i > 0) {
+						if (grid[i - 1][j] == 1)
+							sOne++;
+						else if (grid[i - 1][j] == 2)
+							sTwo++;
 						count++;
 					}
-					//3 (top right)
-					if(i>0&&j<size-1){
-						if(grid[i-1][j+1]==1)sOne++;
-						else if(grid[i-1][j+1]==2)sTwo++;
+					// 3 (top right)
+					if (i > 0 && j < size - 1) {
+						if (grid[i - 1][j + 1] == 1)
+							sOne++;
+						else if (grid[i - 1][j + 1] == 2)
+							sTwo++;
 						count++;
 					}
-					//4 (left)
-					if(j>0){
-						if(grid[i][j-1]==1)sOne++;
-						else if(grid[i][j-1]==2)sTwo++;
+					// 4 (left)
+					if (j > 0) {
+						if (grid[i][j - 1] == 1)
+							sOne++;
+						else if (grid[i][j - 1] == 2)
+							sTwo++;
 						count++;
 					}
-					//5 (right)
-					if(j<size-1){
-						if(grid[i][j+1]==1)sOne++;
-						else if(grid[i][j+1]==2)sTwo++;
+					// 5 (right)
+					if (j < size - 1) {
+						if (grid[i][j + 1] == 1)
+							sOne++;
+						else if (grid[i][j + 1] == 2)
+							sTwo++;
 						count++;
 					}
-					//6 (bottom left)
-					if(i<size-1&&j>0){
-						if(grid[i+1][j-1]==1)sOne++;
-						else if(grid[i+1][j-1]==2)sTwo++;
+					// 6 (bottom left)
+					if (i < size - 1 && j > 0) {
+						if (grid[i + 1][j - 1] == 1)
+							sOne++;
+						else if (grid[i + 1][j - 1] == 2)
+							sTwo++;
 						count++;
 					}
-					//7 (bottom)
-					if(i<size-1){
-						if(grid[i+1][j]==1)sOne++;
-						else if(grid[i+1][j]==2)sTwo++;
+					// 7 (bottom)
+					if (i < size - 1) {
+						if (grid[i + 1][j] == 1)
+							sOne++;
+						else if (grid[i + 1][j] == 2)
+							sTwo++;
 						count++;
 					}
-					//8 (bottom right)
-					if(i<size-1&&j<size-1){
-						if(grid[i+1][j+1]==1)sOne++;
-						else if(grid[i+1][j+1]==2)sTwo++;
+					// 8 (bottom right)
+					if (i < size - 1 && j < size - 1) {
+						if (grid[i + 1][j + 1] == 1)
+							sOne++;
+						else if (grid[i + 1][j + 1] == 2)
+							sTwo++;
 						count++;
 					}
 
-					switch(count){
-					case 3:if(e==1&&sTwo>=2){
-						grid[i][j]=2;
-						hasChanged=true;
+					switch (count) {
+					case 3:
+						if (e == 1 && sTwo >= 2) {
+							grid[i][j] = 2;
+							hasChanged = true;
+						} else if (e == 2 && sOne >= 2) {
+							grid[i][j] = 1;
+							hasChanged = true;
+						}
+						break;
+					case 5:
+						if (e == 1 && sTwo >= 3) {
+							grid[i][j] = 2;
+							hasChanged = true;
+						} else if (e == 2 && sOne >= 3) {
+							grid[i][j] = 1;
+							hasChanged = true;
+						}
+						break;
+					case 8:
+						if (e == 1 && sTwo >= 5) {
+							grid[i][j] = 2;
+							hasChanged = true;
+						} else if (e == 2 && sOne >= 5) {
+							grid[i][j] = 1;
+							hasChanged = true;
+						}
 					}
-					else if(e==2&&sOne>=2){
-						grid[i][j]=1;
-						hasChanged=true;
-					}
-					break;
-					case 5:if(e==1&&sTwo>=3){
-						grid[i][j]=2;
-						hasChanged=true;
-					}
-					else if(e==2&&sOne>=3){
-						grid[i][j]=1;
-						hasChanged=true;
-					}
-					break;
-					case 8:if(e==1&&sTwo>=5){
-						grid[i][j]=2;
-						hasChanged=true;
-					}
-					else if(e==2&&sOne>=5){
-						grid[i][j]=1;
-						hasChanged=true;
-					}
-					}
-					
+
 				}
 			}
 		}
 		return hasChanged;
+	}
+	
+	// Check matrix after player 1's move
+	static void checkMatrixOne(){
+		boolean cont;
+		do{
+			cont=checkMatrix(2);
+		}while(cont);
+		do{
+			cont=checkMatrix(1);
+		}while(cont);
+	}
+	
+	// Check matrix after player 2's move
+	static void checkMatrixTwo(){
+		boolean cont;
+		do{
+			cont=checkMatrix(1);
+		}while(cont);
+		do{
+			cont=checkMatrix(2);
+		}while(cont);
 	}
 
 	// Check if somebody won
